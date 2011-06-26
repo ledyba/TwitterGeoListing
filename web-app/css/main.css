@@ -1,0 +1,246 @@
+/* general */
+html * {
+    margin: 0;
+    /* padding: 0; */
+}
+
+body {
+	background: #FFFFFF;
+}
+
+a {
+	color:#000000;
+}
+a:hover {
+	color:#ff2222;
+}
+
+a#anchor {
+	color:#000000;
+}
+
+a img {
+	border: solid 2px #000000;
+}
+a:hover img {
+	border: solid 2px #ff2222;
+}
+
+a#anchor img {
+	border: solid 2px #000000;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.67em 0px 0.1em 0px;
+}
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.83em 0px 0.2em 0px;
+}
+h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 1.0em 0px 0.1em 0px;
+}
+
+input, select,textarea {
+	background: #ffffff;
+	border: 1px dotted #000000;
+	padding: 3px;
+	color: black;
+}
+
+input[type="button"],input[type="submit"]{
+	background: #ffffff;
+	border: 1px dotted #000000;
+	padding: 3px;
+	color: black;
+}
+
+input:hover{
+	border-color: #ff2222;
+}
+
+input[type="button"]:active,input[type="submit"]:active{
+	padding: 5px 3px 1px;
+}
+
+hr{
+	border-width: 2px 0px 0px 0px;
+	border-style: dotted;
+	border-color: #000000;
+}
+
+table {
+	background: #ffffff;
+	border-width: 2px;
+	border-style: dotted;
+	border-color: #000000;
+	border-collapse:collapse;
+	margin: 5px;
+}
+
+th{
+	background: #000000;
+	border-width: 2px;
+	border-style: dotted;
+	border-color: #ffffff;
+	color: #ffffff
+}
+
+td{
+	background: #ffffff;
+	border-width: 2px;
+	border-style: dotted;
+	border-color: #000000;
+}
+
+p{
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+    text-indent: 1em;
+}
+
+/*-------------------------------------------------------------------------------*/
+div#powerd_by ul li{
+    margin: 0;
+    padding: 0.2em 0.25em 0.2em 0.25em;
+    display: inline;
+}
+div#container {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+}
+
+div#header {
+    padding: 0.1em;
+    margin-bottom: 10px;
+    border: dotted 2px black;
+    font-size: 1.5em;
+}
+
+div#menubar{
+    padding: 0.25em;
+    margin-bottom: 10px;
+    border: dotted 2px black;
+    font-size: 0.8em;
+}
+
+div#menubar ul {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+div#menubar ul li{
+    margin: 0;
+    padding: 0.2em 0.25em 0.2em 0.25em;
+    display: inline;
+}
+
+ol.sidebar,
+ul.sidebar{
+    padding: 0px;
+}
+ol.sidebar li,
+ul.sidebar li{
+    padding: 0.2em 0 0.2em 0;
+}
+
+div#sidebar {
+    width: 12.5em;
+    float: left;
+}
+div#sidebar_content {
+    font-size: 0.8em;
+}
+div#sidebar_content ul li{
+    list-style-type:none;
+    list-style-position:outside;
+}
+div.module{
+    border: 2px dotted #000000;
+    margin-bottom: 0.5em;
+}
+div.module-header {
+    padding: 0.1em;
+    border-bottom: #000000 dotted 2px;
+}
+div.module-content {
+    padding: 0.1em;
+}
+
+div#main {
+    margin-left: 12.5em;
+}
+div#main_content{
+    margin-left: 1em;
+}
+
+div#footer {
+    clear: both;
+    padding: 5px;
+    border-top: #000000 dotted 2px;
+}
+
+hr{
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: dotted 2px black;
+}
+table.nonestyle,
+table.nonestyle tr,
+table.nonestyle td{
+    border: none;
+    padding: 5px;
+}
+table.nonestyle .description{
+    font-size: 0.8em;
+}
+
+
+/* MESSAGES AND ERRORS */
+
+.message {
+    background: #f3f8fc url(../images/skin/information.png) 8px 50% no-repeat;
+    border: 1px solid #b2d1ff;
+    color: #006dba;
+    margin: 10px 0 5px 0;
+    padding: 5px 5px 5px 30px
+}
+
+div.errors {
+    background: #fff3f3;
+    border: 1px solid red;
+    color: #cc0000;
+    margin: 10px 0 5px 0;
+    padding: 5px 0 5px 0;
+}
+div.errors ul {
+    list-style: none;
+    padding: 0;
+}
+div.errors li {
+	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
+    line-height: 16px;
+    padding-left: 30px;
+}
+
+td.errors select {
+    border: 1px solid red;
+}
+td.errors input {
+    border: 1px solid red;
+}
+
+div.larger_buttons{
+    padding: 0em 1em;
+}
+div.larger_buttons input {
+    font-size: 1.1em;
+    border-width: 2px;
+}
