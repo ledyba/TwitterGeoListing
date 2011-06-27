@@ -1,14 +1,8 @@
 package twitter.geo.listing
 
 import java.util.concurrent.Callable
-import twitter4j.TwitterFactory
-import twitter4j.Twitter
-import twitter4j.ProfileImage
-import twitter4j.Status
-import twitter4j.ResponseList
-import twitter4j.Paging
-import twitter4j.auth.AccessToken
-import twitter4j.RateLimitStatus
+import twitter.geo.listing.User
+import twitter4j.*
 
 class PostLoadingService {
 
@@ -25,23 +19,23 @@ class PostLoadingService {
         Long geoCount = 0;
         int apiCount = 0;
         int apiLeft = null;
-        User userInstance;
         try {
             RateLimitStatus rateLimitStatus = twitter.getRateLimitStatus()
             apiLeft = rateLimitStatus.getRemainingHits();
             if (apiLeft < (API_MAX + 30)) {
                 throw new Exception("APIが残り${apiLeft}回しか呼べないので途中ですがメッセージの更新を終了しました。次API制限がリセットされるのは${rateLimitStatus.secondsUntilReset}秒後です。");
             }
-            userInstance = User.findByUserId(userId);
-        } catch (e) {
-            synchronized (loadingStatus) {
+        } catch (ex) {
+            ex.printStackTrace();
+           synchronized (loadingStatus) {
                 loadingStatus[userId] = [
                         status: 'error',
-                        message: "<p>Twitterのエラーです：${e.getMessage().encodeAsHTML()}</p>"
+                        message: "<p>Twitterのエラーです：${ex.getMessage().encodeAsHTML()}</p>"
                 ];
             }
             return;
         }
+        User userInstance = User.findByUserId(userId);
         boolean firstRun = userInstance.maxId == null && userInstance.sinceId == null;
         boolean getLatest = true;
         boolean errorOccured = false;
@@ -65,13 +59,13 @@ class PostLoadingService {
                             statuses = twitter.getUserTimeline(userId, paging);
                             lastError = null;
                             break;
-                        } catch (e) {
-                            e.printStackTrace();
-                            lastError = e;
+                        } catch (exx) {
+                            exx.printStackTrace();
+                            lastError = exx;
                             synchronized (loadingStatus) {
                                 loadingStatus[userId] = [
                                         status: 'loading',
-                                        message: "<p>試行${i + 1}回目/全${5}試行でエラー：${e.localizedMessage}</p>"
+                                        message: "<p>試行${i + 1}回目/全${5}試行でエラー：${exx.localizedMessage}</p>"
                                 ];
                             }
                         }

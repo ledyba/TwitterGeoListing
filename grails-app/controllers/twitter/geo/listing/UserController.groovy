@@ -2,8 +2,8 @@ package twitter.geo.listing
 
 import grails.converters.JSON
 import twitter4j.ProfileImage
-import twitter4j.auth.RequestToken
 import twitter4j.Twitter
+import twitter4j.auth.RequestToken
 
 class UserController {
 
@@ -34,7 +34,7 @@ class UserController {
         twitter4j.User tuser = session["user"];
         if(twitter == null){
             String oauth_verifer = params.oauth_verifier;
-            if(oauth_verifer != null && oauth_verifer.length() > 0){
+            if(oauth_verifer != null && oauth_verifer.length() > 0 && session['token'] != null){
                 try{
                     twitter = twitterService.createTwitter()
                     twitter.getOAuthAccessToken(session['token'], oauth_verifer);

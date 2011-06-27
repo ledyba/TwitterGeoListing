@@ -1,11 +1,10 @@
 package twitter.geo.listing
 
 import twitter4j.TwitterFactory
-import twitter4j.auth.RequestToken
 
 class TwitterService {
 
-    static transactional = true
+    static transactional = false
 
     private TwitterFactory twitterFactory = new TwitterFactory();
     private final static String KEY = "sRtcK6UwkAkwKeYKs6zglg";
