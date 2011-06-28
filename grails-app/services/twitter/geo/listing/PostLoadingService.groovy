@@ -39,14 +39,12 @@ class PostLoadingService {
         boolean firstRun = userInstance.maxId == null && userInstance.sinceId == null;
         boolean getLatest = true;
         boolean errorOccured = false;
-        Long nowMaxId = null;
-        Long nowSinceId = null;
 
-        ResponseList<Status> statuses;
+        def statuses;
 
         def paging = new Paging();
         if (!firstRun) {
-            paging.sinceId = userInstance.maxId;
+            paging.setSinceId(userInstance.maxId+1);
         }
         while (paging != null) {
             User.withTransaction { status ->
@@ -74,6 +72,11 @@ class PostLoadingService {
                         throw lastError;
                     }
                     //DBへの格納
+                    if(userInstance.sinceId != null && userInstance.maxId != null){
+                        statuses = statuses.findAll{it ->
+                            it.id > userInstance.maxId || it.id < userInstance.sinceId;
+                        }
+                    }
                     count += statuses.size();
                     statuses.each { item ->
                         def geo = item.geoLocation;
@@ -103,41 +106,39 @@ class PostLoadingService {
                     //次回以降の取り出し範囲
                     if (firstRun) {
                         if (statuses.size() > 0 && (count < MAX && apiCount < API_MAX)) {
-                            if (nowMaxId == null) {
-                                nowMaxId = statuses.first().id;
-                            }
-                            nowSinceId = statuses.last().id;
-                            paging.setMaxId(nowSinceId);
+                            userInstance.maxId = statuses.first().id;
+                            userInstance.sinceId = statuses.last().id;
+                            userInstance.merge();
+                            paging = new Paging();
+                            paging.setMaxId(userInstance.sinceId-1);
                         } else {
-                            userInstance.maxId = nowMaxId;
-                            userInstance.sinceId = nowSinceId;
-                            userInstance.save();
                             paging = null;
                         }
                     } else {
                         if (getLatest) {
                             if (statuses.size() > 0) {
-                                userInstance.maxId = nowMaxId = statuses.first().id;
-                                userInstance.save();
+                                userInstance.maxId = statuses.first().id;
+                                userInstance.merge();
                                 if (count >= MAX || apiCount >= API_MAX) {
                                     paging = null;
                                 } else {
-                                    paging.setSinceId(statuses.last().id);
+                                    paging = new Paging();
+                                    paging.setSinceId(statuses.last().id+1);
                                 }
                             } else {
                                 getLatest = false;
-                                nowSinceId = null;
                                 paging = new Paging();
-                                paging.maxId = nowMaxId = userInstance.sinceId;
+                                paging.setMaxId(userInstance.sinceId-1);
                             }
                         } else {
                             if (statuses.size() > 0) {
-                                userInstance.sinceId = nowSinceId = statuses.last().id;
-                                userInstance.save();
+                                userInstance.sinceId = statuses.last().id;
+                                userInstance.merge();
                                 if (count >= MAX || apiCount >= API_MAX) {
                                     paging = null;
                                 } else {
-                                    paging.setMaxId(nowSinceId);
+                                    paging = new Paging();
+                                    paging.setMaxId(userInstance.sinceId-1);
                                 }
                             } else {
                                 paging = null;
