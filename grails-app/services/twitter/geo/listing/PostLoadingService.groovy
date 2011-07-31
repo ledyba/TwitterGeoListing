@@ -123,7 +123,7 @@ class PostLoadingService {
                                     paging = null;
                                 } else {
                                     paging = new Paging();
-                                    paging.setSinceId(statuses.last().id+1);
+									paging.setMaxId(userInstance.sinceId-1);
                                 }
                             } else {
                                 getLatest = false;
