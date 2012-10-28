@@ -15,7 +15,7 @@
     <hr />
     <h2>詳しい情報はこちらから</h2>
     <ul>
-        <li>関連のBlog記事：<a href="http://ledyba.ddo.jp/2011/06/26203210.php">Twitterで住所がバレる！？「Twitter住所特定実験」</a></li>
+        <li>関連のBlog記事：<a href="http://ledyba.org/2011/06/26203210.php">Twitterで住所がバレる！？「Twitter住所特定実験」</a></li>
         <li>作者Twitterアカウント：<a href="http://twitter.com/#!/tikal">@tikal</a>（気軽にフォローしてください）</li>
     </ul>
     <hr />
